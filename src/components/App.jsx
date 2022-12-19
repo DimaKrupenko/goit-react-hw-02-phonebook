@@ -11,14 +11,10 @@ class App extends React.Component {
   nameId= nanoid()
   
   handleChange = (evt) => {
-   
       const { name, value } = evt.target;
-    
-
     this.setState(prevState => {
       return {
         [name]: value,
-        
       }
     });
     
@@ -27,20 +23,22 @@ class App extends React.Component {
   handleSubmit = (evt) => {
     evt.preventDefault()
      const form = evt.currentTarget;
+    // const { name, number, } = this.state;
    
-     
     this.setState((prevState) => {
        return {
-        // name: name,
-        // number: number,
-        // contacts: [name, number ],
-         contacts: [prevState.name, prevState.number]
+         contacts: [prevState.name,': ', prevState.number]
       }
      })
     form.reset()
-        this.props.onSubmit({ ...this.state });
+    // this.props.onSubmit({ ...this.state });
 
   }
+
+  // reset = (state) => {
+  //   this.setState({ ...state });
+  // };
+
 
   
   render() {
