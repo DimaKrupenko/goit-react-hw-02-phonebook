@@ -16,6 +16,8 @@ class App extends React.Component {
     filter: '',
   }
   
+
+  
   
   
   formSubmit = contact => {
@@ -25,9 +27,12 @@ class App extends React.Component {
       number: contact.number
     }
      console.log(contact)
+    
     this.setState(prevState => {
           // const { name, number, id } = prevState;
-
+      if (prevState.contacts.map(contact => contact.name.toLowerCase().includes(contact.name.toLowerCase()))) {
+  return alert (contact.name, 'Уже есть в списке')
+} console.log(contact.name, prevState.contacts.map(contact => contact.name))
       return {
         contacts: [ contact, ...prevState.contacts  ],
         // contacts: { contact, ...prevState.contacts }
@@ -36,16 +41,26 @@ class App extends React.Component {
     })
   }
 
-  formFilter = evt => {
+  // formFilter = evt => {
+    
+  //   this.setState(prevState => {
+  //     console.log(prevState.filter)
+  //     return {
+  //       filter: evt.target.value
+  //     }
+  //   })
+  // }
+  handleChangeFilter = evt => {
     
     this.setState(prevState => {
-      console.log(prevState.filter)
       return {
-        filter: evt.target.value
-      }
-    })
-  }
+        filter: evt.target.value,
+      };
+    });
+  };
 
+
+  
 
   
   render() {
@@ -65,12 +80,20 @@ class App extends React.Component {
           <Form onSubmit={this.formSubmit} />
           
           <h2>Contacts</h2>
-          <Filter onChange={this.formFilter}/>
+          <Filter
+          onChange={this.handleChangeFilter}
+          value={this.state.filter}
+          />
+          { this.state.contacts === false ?
+            ' '
+          : <ContactList
+              contacts={this.state.contacts.filter(contact =>
+                contact.name.toLowerCase().includes(this.state.filter.toLowerCase()))}
+            />}
           
-          {this.state.filter === this.state.contacts ?
-            <ContactList contacts={this.state.contacts} />
-          : ' '}
-          
+         {/* this.state.contacts.filter(contact =>
+            contact.name.toLowerCase().includes(this.state.filter.toLowerCase()))
+           */}
           
           
       </div>
