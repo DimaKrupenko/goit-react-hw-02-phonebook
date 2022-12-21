@@ -1,44 +1,39 @@
 import React from 'react';
-import { nanoid } from 'nanoid'
+import Form from './Form/Form'
+import { nanoid } from 'nanoid';
 
 
 class App extends React.Component {
   state = {
-    contacts: [],
-    name: '',
-    number: ''
-  }
-  nameId= nanoid()
-  
-  handleChange = (evt) => {
-      const { name, value } = evt.target;
-    this.setState(prevState => {
-      return {
-        [name]: value,
-      }
-    });
+    contacts: [
+    // { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+    // {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
+    // {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
+    //   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
     
   }
-
-  handleSubmit = (evt) => {
-    evt.preventDefault()
-     const form = evt.currentTarget;
-    // const { name, number, } = this.state;
-   
-    this.setState((prevState) => {
-       return {
-         contacts: [prevState.name,': ', prevState.number]
+  
+  contactId = nanoid()
+  
+  formSubmit = data => {
+    // const { name, number, id } = data;
+     const contact = {
+      id: nanoid(),
+      name: data.name, 
+      number: data.number
+    }
+    console.log(contact)
+    
+    this.setState(prevState => {
+          // const { name, number, id } = prevState;
+console.log(prevState)
+      return {
+        contacts: [ contact, ...prevState.contacts  ]
+        // contacts: { contact, ...prevState.contacts }
       }
-     })
-    form.reset()
-    // this.props.onSubmit({ ...this.state });
-
+    })
   }
-
-  // reset = (state) => {
-  //   this.setState({ ...state });
-  // };
-
 
   
   render() {
@@ -55,34 +50,14 @@ class App extends React.Component {
       >
         <div>
           <h1>PhoneBook</h1>
-          <form onSubmit={this.handleSubmit}>
-          <label htmlFor={this.nameId}>Name
-              <input
-  type="text"
-  name="name"
-  id={this.nameId}
-  pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-  title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-  onChange={this.handleChange}
-  required
-              />
-            </label>
-              <label htmlFor="">Number
-            <input
-  type="tel"
-  name="number"
-  pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-  title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-    onChange={this.handleChange}
-  required
-/>
-            <button type='submit' >Add contact</button>
-            </label>
-            </form>
+          <Form onSubmit={this.formSubmit} />
           <h2>Contacts
             <ul>
-              <li>{this.state.contacts}</li>
-             
+              {this.state.contacts.map(contact => (
+              <li key={this.contactId}>{this.state.contacts}</li>
+            ))}
+              {/* <li key={this.contactId}>{this.state.contacts}</li> */}
+                          
 
               
             </ul>
