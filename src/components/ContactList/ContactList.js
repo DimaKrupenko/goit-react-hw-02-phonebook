@@ -35,5 +35,5 @@ const ContactList = ({ contacts, handleDelete }) => {
 export default ContactList;
 
 ContactList.propTypes = {
-  contacts: PropTypes.string,
+  contacts: PropTypes.array,
 };
