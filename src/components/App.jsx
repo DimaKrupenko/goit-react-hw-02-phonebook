@@ -8,9 +8,9 @@ import ContactList from './ContactList/ContactList';
 class App extends React.Component {
   state = {
     contacts: [
-    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
-    {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
@@ -26,15 +26,26 @@ class App extends React.Component {
       name: contact.name,
       number: contact.number
     }
-     console.log(contact)
+    console.log(contact)
+    
+    
+   
     
     this.setState(prevState => {
-          // const { name, number, id } = prevState;
-      if (prevState.contacts.map(contact => contact.name.toLowerCase().includes(contact.name.toLowerCase()))) {
-  return alert (contact.name, 'Уже есть в списке')
-} console.log(contact.name, prevState.contacts.map(contact => contact.name))
+      // const { name, number, id } = prevState;
+      const nameFilter = this.state.contacts.filter(cont => cont.name.includes(contact.name))
+      const nameLength = nameFilter.length
+       
+      if (nameLength === 1) {
+      
+        return alert(contact.name)
+        
+      }
+       
       return {
-        contacts: [ contact, ...prevState.contacts  ],
+         
+         
+        contacts: [contact, ...prevState.contacts]
         // contacts: { contact, ...prevState.contacts }
        
       }
@@ -59,11 +70,26 @@ class App extends React.Component {
     });
   };
 
+  handleDelete = contactId => {
+   
+    this.setState(prevState => {
+      return {
+        contacts: prevState.contacts.filter(contact => contact.id !== contactId)
+      }
+    })
+    //     // contacts: { contact, ...prevState.contacts }
+       
+  }
+    
+
 
   
 
   
   render() {
+    
+    const visibleContact = this.state.contacts.filter(contact =>
+                contact.name.toLowerCase().includes(this.state.filter.toLowerCase()))
     return (
       <div
         style={{
@@ -84,16 +110,12 @@ class App extends React.Component {
           onChange={this.handleChangeFilter}
           value={this.state.filter}
           />
-          { this.state.contacts === false ?
-            ' '
-          : <ContactList
-              contacts={this.state.contacts.filter(contact =>
-                contact.name.toLowerCase().includes(this.state.filter.toLowerCase()))}
-            />}
           
-         {/* this.state.contacts.filter(contact =>
-            contact.name.toLowerCase().includes(this.state.filter.toLowerCase()))
-           */}
+          <ContactList
+            contacts={visibleContact}
+            handleDelete={this.handleDelete}
+            />
+          
           
           
       </div>
