@@ -1,5 +1,6 @@
 // import React from 'react';
 import styles from './ContactList.module.css';
+import PropTypes from 'prop-types';
 
 // class ContactList extends React.Component {
 //   render() {
@@ -32,3 +33,7 @@ const ContactList = ({ contacts, handleDelete }) => {
 };
 
 export default ContactList;
+
+ContactList.propTypes = {
+  contacts: PropTypes.string,
+};
