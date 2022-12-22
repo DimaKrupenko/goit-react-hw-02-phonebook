@@ -2,17 +2,6 @@
 import styles from './ContactList.module.css';
 import PropTypes from 'prop-types';
 
-// class ContactList extends React.Component {
-//   render() {
-//     return (
-//       <ul>
-//         {this.state.contacts.map(contact => (
-//           <li key={contact.id}>{contact.name + ': ' + contact.number}</li>
-//         ))}
-//       </ul>
-//     );
-//   }
-// }
 const ContactList = ({ contacts, handleDelete }) => {
   return (
     <ul className={styles.contact}>

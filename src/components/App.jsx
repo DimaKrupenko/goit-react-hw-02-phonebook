@@ -15,11 +15,6 @@ class App extends React.Component {
     ],
     filter: '',
   }
-  
-
-  
-  
-  
   formSubmit = contact => {
     contact = {
       id: nanoid(),
@@ -27,10 +22,7 @@ class App extends React.Component {
       number: contact.number
     }
     console.log(contact)
-    
-    
-   
-    
+
     this.setState(prevState => {
       // const { name, number, id } = prevState;
       const nameFilter = this.state.contacts.filter(cont => cont.name.includes(contact.name))
@@ -43,24 +35,11 @@ class App extends React.Component {
       }
        
       return {
-         
-         
-        contacts: [contact, ...prevState.contacts]
-        // contacts: { contact, ...prevState.contacts }
-       
+        contacts: [contact, ...prevState.contacts]       
       }
     })
   }
 
-  // formFilter = evt => {
-    
-  //   this.setState(prevState => {
-  //     console.log(prevState.filter)
-  //     return {
-  //       filter: evt.target.value
-  //     }
-  //   })
-  // }
   handleChangeFilter = evt => {
     
     this.setState(prevState => {
@@ -77,15 +56,8 @@ class App extends React.Component {
         contacts: prevState.contacts.filter(contact => contact.id !== contactId)
       }
     })
-    //     // contacts: { contact, ...prevState.contacts }
        
   }
-    
-
-
-  
-
-  
   render() {
     
     const visibleContact = this.state.contacts.filter(contact =>
@@ -115,9 +87,6 @@ class App extends React.Component {
             contacts={visibleContact}
             handleDelete={this.handleDelete}
             />
-          
-          
-          
       </div>
         
       </div>
