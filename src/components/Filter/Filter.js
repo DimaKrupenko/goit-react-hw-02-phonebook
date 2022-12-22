@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Filter.module.css';
 
 // class Filter extends React.Component {
 //   state = {
@@ -29,9 +30,14 @@ import React from 'react';
 
 const Filter = ({ value, onChange }) => {
   return (
-    <label htmlFor="">
+    <label className={styles.filter__label} htmlFor="">
       Find contacts by names
-      <input type="text" onChange={onChange} value={value} />
+      <input
+        className={styles.filter__input}
+        type="text"
+        onChange={onChange}
+        value={value}
+      />
     </label>
     //     );
   );

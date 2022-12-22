@@ -1,4 +1,5 @@
 // import React from 'react';
+import styles from './ContactList.module.css';
 
 // class ContactList extends React.Component {
 //   render() {
@@ -13,11 +14,15 @@
 // }
 const ContactList = ({ contacts, handleDelete }) => {
   return (
-    <ul>
+    <ul className={styles.contact}>
       {contacts.map(contact => (
-        <li key={contact.id}>
+        <li className={styles.contact__list} key={contact.id}>
           {contact.name + ': ' + contact.number}
-          <button type="click" onClick={() => handleDelete(contact.id)}>
+          <button
+            className={styles.contact__buttton}
+            type="click"
+            onClick={() => handleDelete(contact.id)}
+          >
             Delete
           </button>
         </li>

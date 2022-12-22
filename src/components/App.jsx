@@ -38,7 +38,7 @@ class App extends React.Component {
        
       if (nameLength === 1) {
       
-        return alert(contact.name)
+        return alert(contact.name, 'is already in contacts')
         
       }
        
@@ -93,7 +93,7 @@ class App extends React.Component {
     return (
       <div
         style={{
-          height: '100vh',
+          // height: '100vh',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
